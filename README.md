@@ -4,11 +4,11 @@
 Una herramienta de línea de comandos en Python para **encriptar y desencriptar texto** usando el algoritmo **AES (Advanced Encryption Standard)** con soporte para diferentes modos (CBC, GCM, etc.), emulando el formato de OpenSSL para compatibilidad.
 
 Especialmente util cuando se trabaja con la Libreria CrytoJS con la configuración de AES
-por defecto:
-**Longitud**: 256 Bytes
-**Modo de operación**: CBC (Cipher Block Chaining).
-**Padding**: Pkcs7.
-**Clave (key)**: Se pasa directamente como un string, pero CryptoJS espera una clave de tipo WordArray. Si la clave no tiene el tamaño adecuado (128, 192 o 256 bits), se deriva internamente usando el algoritmo EVP_BytesToKey de OpenSSL.
+por defecto:<br>
+**Longitud**: 256 Bytes<br>
+**Modo de operación**: CBC (Cipher Block Chaining).<br>
+**Padding**: Pkcs7.<br>
+**Clave (key)**: Se pasa directamente como un string, pero CryptoJS espera una clave de tipo WordArray. Si la clave no tiene el tamaño adecuado (128, 192 o 256 bits), se deriva internamente usando el algoritmo EVP_BytesToKey de OpenSSL.<br>
 **IV (Vector de Inicialización)**: Si no se especifica en la función AES.decrypt(), por lo que se usa el IV por defecto, que en CryptoJS es 0x00000000000000000000000000000000 (16 bytes de ceros).
 
 Cálculo del Key y IV con EVP_BytesToKey (MD5 iterativo):
@@ -16,9 +16,7 @@ Se usa MD5 iterativamente para generar los bytes necesarios:
 Primera iteración: MD5("secretkey12345") → 16 bytes
 Segunda iteración: MD5(Primer MD5 + "secretkey12345") → 16 bytes
 (Más iteraciones si es necesario hasta completar clave + IV)
-Para AES-256 necesitamos:
-Clave de 32 bytes
-IV de 16 bytes
+Para AES-256 necesitamos: Clave de 32 bytes y IV de 16 bytes
 
 ---
 
