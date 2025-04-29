@@ -29,7 +29,10 @@ Para AES-256 necesitamos: Clave de 32 bytes y IV de 16 bytes
 
 ## Instalación
 ```bash
+git clone https://github.com/soy-oreocato/AES-Tool.git
+cd AES-Tool
 curl -Ls https://astral.sh/uv/install.sh | sh
+uv venv 
 source .venv/bin/activate
 uv pip install -r requirements.txt
 ```
