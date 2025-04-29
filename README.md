@@ -19,6 +19,7 @@ Segunda iteración: MD5(Primer MD5 + "secretkey12345") → 16 bytes
 Para AES-256 necesitamos:
 Clave de 32 bytes
 IV de 16 bytes
+
 ---
 
 ## 🚀 Requisitos
