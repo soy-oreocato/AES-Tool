@@ -67,14 +67,30 @@ def decrypt_aes(ciphertext_b64: str, password: str):
 def main():
     parser = argparse.ArgumentParser(description="AES Tool (CBC mode, OpenSSL compatible)")
     parser.add_argument("-a", "--action", required=True, choices=["e", "d"], help="Acción: encrypt o decrypt")
-    parser.add_argument("-k", "--key", required=True, help="Llave (password)")
-    parser.add_argument("-t", "--text", required=True, help="Texto plano o cifrado (base64)")
+    parser.add_argument("-k", "--key", help="Llave (password)")
+    parser.add_argument("-t", "--text", help="Texto plano o cifrado (base64)")
+    parser.add_argument("-tf", "--text_file", help="Ruta a archivo de entrada")
     parser.add_argument("-m", "--mode", choices=["CBC"], default="CBC", help="Modo de cifrado (por ahora solo CBC)")
 
     args = parser.parse_args()
 
     if args.mode != "CBC":
         print("Solo se soporta CBC por ahora.")
+        return
+
+    # Texto: Leer contenido desde archivo si se especifica
+    if args.text_file:
+        try:
+            with open(args.text_file, 'r', encoding='utf-8') as f:
+                #Elimina salto de linea al final del archivo
+                args.text = f.read().strip() 
+        except Exception as e:
+            print(f"❌ Error al leer el archivo: {e}")
+            return
+
+    # Verificar que hay texto disponible
+    if not args.text:
+        print("❌ Debes proporcionar texto con -t o un archivo con -f")
         return
 
     try:
@@ -89,3 +105,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
